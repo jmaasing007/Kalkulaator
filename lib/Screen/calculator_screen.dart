@@ -42,10 +42,9 @@ class _CalculatorState extends State<Calculator> {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery
-                .of(context)
+            height: MediaQuery.of(context)
                 .size
-                .height / 1,
+                .height,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -55,8 +54,8 @@ class _CalculatorState extends State<Calculator> {
                   child: Text(
                     userInput,
                     style: const TextStyle(
-                      fontSize: 32,
-                      color: Colors.black,
+                      fontSize: 56,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -152,7 +151,7 @@ class _CalculatorState extends State<Calculator> {
     if (text == "=") {
       return yellowColor;
     }
-    return Color(0xFF1d2630);
+    return const Color(0xFF1d2630);
   }
 
   handleButtons(String text) {
