@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calculator_maasing/Design/colors.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:calculator_maasing/Screen/kmtomiles_screen.dart';
 
 class Calculator extends StatefulWidget {
    const Calculator({Key? key}) : super(key: key);
@@ -34,23 +35,36 @@ class _CalculatorState extends State<Calculator> {
     '.',
     '=',
   ];
-
+void navigateNextPage(BuildContext ctx)
+{
+  Navigator.of(ctx).push(MaterialPageRoute(builder: (_)
+      {return const KmtomilesScreen();
+  }));
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: operatorColor,
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context)
-                .size
-                .height,
-            child: Column(
+      appBar: AppBar(
+        leading: IconButton(icon: const Icon(Icons.menu), onPressed: (){
+        },),
+        title: const Text("Calculator"),
+        actions: [IconButton(icon: const Icon(Icons.search), onPressed: (){
+        },),],
+      ),
+      body:Center(
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                ElevatedButton(onPressed: () {
+                    navigateNextPage(context);
+                },
+
+                    child: const Text('KMtoMILES>>',
+                      style: TextStyle(),
+                    )),
                 Container(
                   padding: const EdgeInsets.all(20),
-                  alignment: Alignment.centerRight,
                   child: Text(
                     userInput,
                     style: const TextStyle(
@@ -59,6 +73,7 @@ class _CalculatorState extends State<Calculator> {
                     ),
                   ),
                 ),
+
                 Container(
                   padding: const EdgeInsets.all(10),
                   alignment: Alignment.centerRight,
@@ -74,7 +89,8 @@ class _CalculatorState extends State<Calculator> {
                 const Divider(color: Colors.white),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(25),
+                    alignment: Alignment.bottomCenter,
+                    padding: const EdgeInsets.all(30),
                     child: GridView.builder(
                       itemCount: buttonList.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -91,8 +107,8 @@ class _CalculatorState extends State<Calculator> {
               ],
             ),
           ),
-        ],
-      ),
+
+
 
     );
   }
