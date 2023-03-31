@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-
-
-
 class KmtomilesScreen extends StatefulWidget {
   const KmtomilesScreen({Key? key}) : super(key: key);
 
@@ -12,9 +9,9 @@ class KmtomilesScreen extends StatefulWidget {
 }
 
 class _KmtomilesScreenState extends State<KmtomilesScreen> {
-  double _numberFrom;
-  String _startMeasure;
-  String _endMeasure;
+  late double _numberFrom;
+  late String _startMeasure;
+  late String _endMeasure;
   final List<String> _measures = [
     'meters',
     'kilometers',
@@ -25,13 +22,36 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
     'pounds',
     'ounces',
   ];
+
   @override
   void initState(){
     _numberFrom = 0;
+    _startMeasure = _measures[1];
+    _endMeasure = _measures[5];
     super.initState();
   }
+  double convert (double value, String from, String to){
+    switch(from){
+      case'kilometers':
+        switch(to){
+          case 'miles':
+            return value * 0.621371;
+            default:
+             return value;
+        }
+        case 'miles':
+          switch(to){
+            case 'kilometers':
+              return value * 1.60934;
+            default:
+              return value;
+      }
+      default:
+        return value;
+    }
+  }
+  @override
   Widget build(BuildContext context) {
-    double sizeX = MediaQuery.of(context).size.width;
     double sizeY = MediaQuery.of(context).size.height;
     final spacer = Padding(padding: EdgeInsets.only(bottom: sizeY / 40));
     final TextStyle inputStyle = TextStyle(
@@ -54,7 +74,7 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
           Text("Value", style: inputStyle),
           TextField(
             textAlign: TextAlign.center,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Please enter the values you want to convert",
             ),
             onChanged: (text) {
@@ -67,6 +87,7 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
             },
           ),
           spacer,
+          // ignore: unnecessary_null_comparison
           Text((_numberFrom==null)? ' ' : _numberFrom.toString()),
           spacer,
           Text("From",
@@ -82,8 +103,9 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
                   );
                 }).toList(),
                      onChanged: (value) {
+                       assert(value != null);
                       setState(() {
-                      _startMeasure =value;
+                      _startMeasure =value!;
                     });
                 },
             ),
@@ -103,7 +125,7 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _startMeasure = value;
+                _startMeasure = value!;
               });
             },
           ),
@@ -113,4 +135,5 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
       ),
     );
   }
+
 }
