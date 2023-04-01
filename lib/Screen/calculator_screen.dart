@@ -1,20 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator_maasing/Design/colors.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:calculator_maasing/Screen/kmtomiles_screen.dart';
 import 'package:calculator_maasing/Screen/history_screen.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 
-import '../main.dart';
 
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  await Hive.openBox('History');
-  runApp(const MyCalc());
-}
 class Calculator extends StatefulWidget {
    const Calculator({Key? key}) : super(key: key);
 
@@ -76,6 +69,9 @@ void navigateNextPage(BuildContext ctx)
                       style: TextStyle(),
                     )),
                 ElevatedButton(onPressed: () {
+                  if (kDebugMode) {
+                    print("Button pressed");
+                  }
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const History()));
                 },
 
