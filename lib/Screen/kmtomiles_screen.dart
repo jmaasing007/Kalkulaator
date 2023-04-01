@@ -23,6 +23,8 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
     'ounces',
   ];
 
+  get _convertedValue => null;
+
   @override
   void initState(){
     _numberFrom = 0;
@@ -92,6 +94,12 @@ class _KmtomilesScreenState extends State<KmtomilesScreen> {
           spacer,
           Text("From",
           style: labelStyle,
+          ),
+          Text(
+            _convertedValue != null
+                ? '${_convertedValue.toStringAsFixed(2)} $_endMeasure'
+                : '',
+            style: TextStyle(fontSize: 20, color: Colors.blue[900]),
           ),
           DropdownButton(
             isExpanded: true,
