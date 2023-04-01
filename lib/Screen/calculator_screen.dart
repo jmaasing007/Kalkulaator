@@ -72,7 +72,7 @@ void navigateNextPage(BuildContext ctx)
                   if (kDebugMode) {
                     print("Button pressed");
                   }
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const History()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => History()));
                 },
 
                     child: const Text('History>>',

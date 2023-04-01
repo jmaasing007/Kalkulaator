@@ -1,3 +1,4 @@
+import 'package:calculator_maasing/Model/historyitem.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'Screen/calculator_screen.dart';
@@ -6,7 +7,8 @@ import 'Screen/calculator_screen.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox('History');
+  Hive.registerAdapter(HistoryItemAdapter());
+  await Hive.openBox<HistoryItem>('history');
   runApp(const MyCalc());
 }
 
